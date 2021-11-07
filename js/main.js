@@ -94,6 +94,9 @@ function renderChart2(series) {
         }],
         legend_visible: false,
         defaultSeries_lastPoint_label_text: '<b>%seriesName</b>',
+        xAxis_crosshair_enabled: true,
+        //Customise the crosshair tooltip
+        defaultPoint_tooltip: '%seriesName <b>%yValue</b> years',
         series: series
     })
 }
