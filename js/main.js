@@ -37,6 +37,7 @@ fetch('https://data.cdc.gov/resource/w9j2-ggv5.csv')
     .then(function(text) {
         let series = csvToSeries(text);
         renderChart(series);
+        renderChart2(series);
     })
     .catch(function(error) {
         //throw error if csv file cannot be downloaded
@@ -65,18 +66,34 @@ function csvToSeries(text) {
 
     console.log([male, female])
     return [
-        { name: 'male', points: male },
+        { name: 'Male', points: male },
         { name: 'Female', points: female }
     ];
 }
 
 function renderChart(series) {
+    //chart with legend
     JSC.Chart('chart3', {
         title_label_text: "Life Expectancy in the United States of America",
         annotations: [{
             label_text: 'Source: National Center for Health Statistics',
-            position: 'bottom right'
+            position: 'inside bottom right'
         }],
+        legend_template: '%name,%icon',
+        series: series
+    })
+}
+
+function renderChart2(series) {
+    //chart with line labels
+    JSC.Chart('chart4', {
+        title_label_text: "Life Expectancy in the United States of America",
+        annotations: [{
+            label_text: 'Source: National Center for Health Statistics',
+            position: 'inside bottom right'
+        }],
+        legend_visible: false,
+        defaultSeries_lastPoint_label_text: '<b>%seriesName</b>',
         series: series
     })
 }
